@@ -35,21 +35,21 @@ Background: Navigate to Home Page
       | joinNow  | url                                                               |
       | Join Now | https://tla-batch-6.github.io/advance-systems-test-b6/joinUs.html |
 
-  @ASB-9 @regression
-  Scenario Outline: Verify second navigation bar on the top right is displayed and enable.
-    When I scroll down
-    Then Verify "<navBar2>" is displayed
-    #Then Verify "<navBar2>" is enable
-    Then Verify "<navBar2>" navigate to window as url as "<url>"
-   # Then Verify destination window as url as "<url>"
-    Examples:
-      | navBar2    | url                                                                 |
-      | Home       | https://tla-batch-6.github.io/advance-systems-test-b6/index.html    |
-      | About Us   | https://tla-batch-6.github.io/advance-systems-test-b6/about.html    |
-      | Services   | https://tla-batch-6.github.io/advance-systems-test-b6/services.html |
-      | Clients    | https://tla-batch-6.github.io/advance-systems-test-b6/clients.html  |
-      | Join Us    | https://tla-batch-6.github.io/advance-systems-test-b6/joinUs.html   |
-      | Contact Us | https://tla-batch-6.github.io/advance-systems-test-b6/contact.html  |
+#  @ASB-9 @regression
+#  Scenario Outline: Verify second navigation bar on the top right is displayed and enable.
+#    When I scroll down
+#    Then Verify "<navBar2>" is displayed
+#    #Then Verify "<navBar2>" is enable
+#    Then Verify "<navBar2>" navigate to window as url as "<url>"
+#   # Then Verify destination window as url as "<url>"
+#    Examples:
+#      | navBar2    | url                                                                 |
+#      | Home       | https://tla-batch-6.github.io/advance-systems-test-b6/index.html    |
+#      | About Us   | https://tla-batch-6.github.io/advance-systems-test-b6/about.html    |
+#      | Services   | https://tla-batch-6.github.io/advance-systems-test-b6/services.html |
+#      | Clients    | https://tla-batch-6.github.io/advance-systems-test-b6/clients.html  |
+#      | Join Us    | https://tla-batch-6.github.io/advance-systems-test-b6/joinUs.html   |
+#      | Contact Us | https://tla-batch-6.github.io/advance-systems-test-b6/contact.html  |
 
   @ASB-11
   Scenario Outline: Verify these section is displayed

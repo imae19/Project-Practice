@@ -133,16 +133,16 @@ public class HomeSteps implements CommonPage {
         a.build().perform();
     }
 
-    @Then("Verify {string} navigate to window as url as {string}")
-    public void verifyNavigateToWindowAsUrlAs(String navBar2, String url) {
-
-      //  BrowserUtils.waitForElementVisibility(getElementByXpath(XPATH_TEMPLATE_NAV_LINK_TEXT, navBar2));
-       // BrowserUtils.click(getElementByXpath(XPATH_TEMPLATE_NAV_LINK_TEXT,navBar2));
-        BrowserUtils.waitForElementClickability(getElementByXpath(XPATH_TEMPLATE_LINKTEXT, navBar2));
-        BrowserUtils.click(getElementByXpath(XPATH_TEMPLATE_LINKTEXT,navBar2));
-      //  BrowserUtils.switchToNewWindow();
-        BrowserUtils.assertEquals(BrowserUtils.getDriver().getCurrentUrl(),url);
-    }
+//    @Then("Verify {string} navigate to window as url as {string}")
+//    public void verifyNavigateToWindowAsUrlAs(String navBar2, String url) {
+//
+//      //  BrowserUtils.waitForElementVisibility(getElementByXpath(XPATH_TEMPLATE_NAV_LINK_TEXT, navBar2));
+//       // BrowserUtils.click(getElementByXpath(XPATH_TEMPLATE_NAV_LINK_TEXT,navBar2));
+//        BrowserUtils.waitForElementClickability(getElementByXpath(XPATH_TEMPLATE_LINKTEXT, navBar2));
+//        BrowserUtils.click(getElementByXpath(XPATH_TEMPLATE_LINKTEXT,navBar2));
+//      //  BrowserUtils.switchToNewWindow();
+//        BrowserUtils.assertEquals(BrowserUtils.getDriver().getCurrentUrl(),url);
+//    }
 }
 
 
