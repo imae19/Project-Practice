@@ -1,9 +1,11 @@
 package step_definitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -13,8 +15,6 @@ import utils.BrowserUtils;
 import utils.CucumberLogUtils;
 
 import java.util.List;
-
-
 
 
 public class HomeSteps implements CommonPage {
@@ -76,6 +76,13 @@ public class HomeSteps implements CommonPage {
             case "Contact Us":
                 element = page.navBar2;
                 BrowserUtils.assertTrue(BrowserUtils.isDisplayed(element));
+                break;
+            case "https://facebook.com":
+            case "https://twitter.com":
+            case "https://skype.com":
+            case "https://linkedin.com":
+                BrowserUtils.assertTrue(getElementByXpath(XPATH_TEMPLATE_FOOTERLINKHREF, txt).isDisplayed());
+                break;
             default:
                 element = BrowserUtils.getDriver().findElement(By.xpath(String.format(XPATH_TEMPLATE_TEXT_CONTAINS, txt)));
                 BrowserUtils.assertTrue(BrowserUtils.isDisplayed(element));
@@ -98,14 +105,6 @@ public class HomeSteps implements CommonPage {
                 element = page.joinNow;
                 BrowserUtils.click(element);
                 break;
-            case "Home":
-            case "About Us":
-            case "Services":
-            case "Clients":
-            case "Join Us":
-            case "Contact Us":
-                element = page.navBar2;
-                BrowserUtils.assertTrue(getElementByXpath(XPATH_TEMPLATE_LINKTEXT, navBtn).isEnabled());
             default:
                 BrowserUtils.assertTrue(getElementByXpath(XPATH_TEMPLATE_LINKTEXT, navBtn).isEnabled());
         }
@@ -121,28 +120,58 @@ public class HomeSteps implements CommonPage {
     @Then("Verify destination window as url as {string}")
     public void verifyDestinationWindowAsUrlAs(String url) {
         BrowserUtils.switchToNewWindow();
-        BrowserUtils.assertEquals(BrowserUtils.getDriver().getCurrentUrl(),url);
+        BrowserUtils.assertEquals(BrowserUtils.getDriver().getCurrentUrl(), url);
     }
 
-    @When("I scroll down")
-    public void iScrollDown() {
-        Actions a = new Actions(BrowserUtils.getDriver());
-        for (int i = 0; i < 7 ; i++) {
-            a.sendKeys(Keys.PAGE_DOWN)  ;
-        }
-        a.build().perform();
+//    @When("I scroll down")
+//    public void iScrollDown() {
+//        Actions a = new Actions(BrowserUtils.getDriver());
+//        for (int i = 0; i < 7 ; i++) {
+//            a.sendKeys(Keys.PAGE_DOWN)  ;
+//        }
+//        a.build().perform();
+    //   }
+
+    @Then("verify {string} is displayed when scroll down")
+    public void verifyIsDisplayedWhenScrollDown(String navBar2) {
+        JavascriptExecutor js = (JavascriptExecutor) BrowserUtils.getDriver(); // jsexecutor is for behavior of mouse and keyboard
+        js.executeScript("window.scrollBy(0,1000)");
+        BrowserUtils.isDisplayed(getElementByXpath(XPATH_TEMPLATE_NAV_LINK_TEXT, navBar2));
     }
 
-//    @Then("Verify {string} navigate to window as url as {string}")
-//    public void verifyNavigateToWindowAsUrlAs(String navBar2, String url) {
-//
-//      //  BrowserUtils.waitForElementVisibility(getElementByXpath(XPATH_TEMPLATE_NAV_LINK_TEXT, navBar2));
-//       // BrowserUtils.click(getElementByXpath(XPATH_TEMPLATE_NAV_LINK_TEXT,navBar2));
-//        BrowserUtils.waitForElementClickability(getElementByXpath(XPATH_TEMPLATE_LINKTEXT, navBar2));
-//        BrowserUtils.click(getElementByXpath(XPATH_TEMPLATE_LINKTEXT,navBar2));
-//      //  BrowserUtils.switchToNewWindow();
-//        BrowserUtils.assertEquals(BrowserUtils.getDriver().getCurrentUrl(),url);
-//    }
+    @Then("Verify {string} navigate to window as url as {string}")
+    public void verifyNavigateToWindowAsUrlAs(String navBar2, String url) {
+        // BrowserUtils.click(BrowserUtils.getDriver().findElement(By.xpath(String.format(XPATH_TEMPLATE_NAV_LINK_TEXT, navBar2)))); >> long version of line below
+        BrowserUtils.click(getElementByXpath(XPATH_TEMPLATE_NAV_LINK_TEXT, navBar2)); // commonPage template
+        BrowserUtils.switchToNewWindow();
+        BrowserUtils.assertEquals(BrowserUtils.getDriver().getCurrentUrl(), url);
+    }
+
+    @Then("Verify {string} icon is displayed")
+    public void verifyIconIsDisplayed(String socialMediaTop) {
+        BrowserUtils.isDisplayed(BrowserUtils.getDriver().findElement(By.xpath(
+                String.format(XPATH_TEMPLATE_HREF, socialMediaTop)
+        )));
+    }
+
+    @When("I click {string}")
+    public void iClick(String link) {
+        BrowserUtils.click(getElementByXpath(XPATH_TEMPLATE_HREF, link));
+    }
+
+    @And("Verify {string} link to window as url as {string}")
+    public void verifyLinkToWindowAsUrlAs(String socialMediaBtn, String url) {
+        BrowserUtils.click(getElementByXpath(XPATH_TEMPLATE_FOOTERLINKHREF, socialMediaBtn));
+        BrowserUtils.switchToNewWindow();
+        BrowserUtils.assertEquals(BrowserUtils.getDriver().getCurrentUrl(), url);
+    }
+
+    @And("Verify {string} direct to window as url as {string}")
+    public void verifyDirectToWindowAsUrlAs(String socialMediaTop, String url) {
+        BrowserUtils.click(getElementByXpath(XPATH_TEMPLATE_HREF, socialMediaTop));
+        BrowserUtils.switchToNewWindow();
+        BrowserUtils.assertEquals(BrowserUtils.getDriver().getCurrentUrl(), url);
+    }
 }
 
 

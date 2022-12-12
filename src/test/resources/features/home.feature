@@ -26,30 +26,37 @@ Background: Navigate to Home Page
       | French      |
 
   @ASB-8 @regression
-  Scenario Outline: Verify Join Now  is displayed and enable
+  Scenario Outline: Verify Join Now is displayed and enable
     Then Verify "<joinNow>" is displayed
     Then Verify "<joinNow>" is enable
- #   Then Verify webpage navigate to url page
     Then Verify destination window as url as "<url>"
     Examples:
       | joinNow  | url                                                               |
       | Join Now | https://tla-batch-6.github.io/advance-systems-test-b6/joinUs.html |
 
-#  @ASB-9 @regression
-#  Scenario Outline: Verify second navigation bar on the top right is displayed and enable.
-#    When I scroll down
-#    Then Verify "<navBar2>" is displayed
-#    #Then Verify "<navBar2>" is enable
-#    Then Verify "<navBar2>" navigate to window as url as "<url>"
-#   # Then Verify destination window as url as "<url>"
-#    Examples:
-#      | navBar2    | url                                                                 |
-#      | Home       | https://tla-batch-6.github.io/advance-systems-test-b6/index.html    |
-#      | About Us   | https://tla-batch-6.github.io/advance-systems-test-b6/about.html    |
-#      | Services   | https://tla-batch-6.github.io/advance-systems-test-b6/services.html |
-#      | Clients    | https://tla-batch-6.github.io/advance-systems-test-b6/clients.html  |
-#      | Join Us    | https://tla-batch-6.github.io/advance-systems-test-b6/joinUs.html   |
-#      | Contact Us | https://tla-batch-6.github.io/advance-systems-test-b6/contact.html  |
+  @ASB-9 @regression
+  Scenario Outline: Verify second navigation bar on the top right is displayed and enable.
+    Then verify "<navBar2>" is displayed when scroll down
+    Then Verify "<navBar2>" navigate to window as url as "<url>"
+    Examples:
+      | navBar2    | url                                                                 |
+      | Home       | https://tla-batch-6.github.io/advance-systems-test-b6/index.html    |
+      | About Us   | https://tla-batch-6.github.io/advance-systems-test-b6/about.html    |
+      | Services   | https://tla-batch-6.github.io/advance-systems-test-b6/services.html |
+      | Clients    | https://tla-batch-6.github.io/advance-systems-test-b6/clients.html  |
+      | Join Us    | https://tla-batch-6.github.io/advance-systems-test-b6/joinUs.html   |
+      | Contact Us | https://tla-batch-6.github.io/advance-systems-test-b6/contact.html  |
+
+  @ASB-10 @regression
+  Scenario Outline: Verify social media is displayed and enable
+    Then Verify "<socialMediaTop>" icon is displayed
+    And Verify "<socialMediaTop>" direct to window as url as "<url>"
+    Examples:
+      | socialMediaTop       | url                       |
+      | https://facebook.com | https://www.facebook.com/ |
+      | https://twitter.com  | https://twitter.com/      |
+      | https://google.com   | https://www.google.com/   |
+      | https://linkedin.com | https://www.linkedin.com/ |
 
   @ASB-11
   Scenario Outline: Verify these section is displayed
@@ -72,16 +79,15 @@ Background: Navigate to Home Page
         | Email: Info@advancesystems.us       |
         | Mon to Sat: 9.00 am to 5:00 pm      |
 
+  @ASB-16 @regression
+  Scenario Outline:  Social media buttons displayed in the footer section
+    Then Verify "<socialMediaBtn>" is displayed
+    And Verify "<socialMediaBtn>" link to window as url as "<url>"
+    Examples:
+      | socialMediaBtn       | url                       |
+      | https://facebook.com | https://www.facebook.com/ |
+      | https://twitter.com  | https://twitter.com/      |
+      | https://skype.com    | https://www.skype.com/en/ |
+      | https://linkedin.com | https://www.linkedin.com/ |
 
 
-
-
-#  Scenario Outline: Verify practice website destination url
-#    When I click link text "<linkText>"
-#    Then Verify destination window as url as "<URL>"
-#    Examples:
-#      | linkText      | URL                                     |
-#      | PHP Travels   | https://phptravels.com/demo/          |
-#      | Mercury tours | http://ww7.demoaut.com/          |
-#      | Internet      | http://the-internet.herokuapp.com/           |
-#      | E-commerce    | http://automationpractice.com/index.php |

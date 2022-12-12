@@ -231,4 +231,7 @@ public class BrowserUtils {
         String result =element.toString().split(" -> ")[1];
         return result.substring(0,result.length()-1);
     }
+
+    public static void hoverOver(WebElement element) {
+    }
 }
