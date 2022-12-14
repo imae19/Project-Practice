@@ -37,7 +37,7 @@ public class HomeSteps implements CommonPage {
 
     @Then("Verify {string} is displayed")
     public void verifyIsDisplayed(String txt) {
-        WebElement element = null;
+        WebElement element;
 
         switch (txt) {
             case "10090 Main Street Fairfax, VA, USA":
@@ -63,10 +63,14 @@ public class HomeSteps implements CommonPage {
             case "Rewards & Benefits":
             case "Employee & Employer Relations":
             case "Excellent Customer Service":
+                BrowserUtils.sleep(2000);
+                CucumberLogUtils.attachScreenshot(true);
                 break;
             case "Join Now":
                 element = page.joinNow;
                 BrowserUtils.assertTrue(BrowserUtils.isDisplayed(element));
+                BrowserUtils.sleep(2000);
+                CucumberLogUtils.attachScreenshot(true);
                 break;
             case "Home":
             case "About Us":
@@ -119,6 +123,8 @@ public class HomeSteps implements CommonPage {
 
     @Then("Verify destination window as url as {string}")
     public void verifyDestinationWindowAsUrlAs(String url) {
+        BrowserUtils.sleep(2000);
+        CucumberLogUtils.attachScreenshot(true);
         BrowserUtils.switchToNewWindow();
         BrowserUtils.assertEquals(BrowserUtils.getDriver().getCurrentUrl(), url);
     }
@@ -134,17 +140,24 @@ public class HomeSteps implements CommonPage {
 
     @Then("verify {string} is displayed when scroll down")
     public void verifyIsDisplayedWhenScrollDown(String navBar2) {
+        BrowserUtils.sleep(2000);
+        CucumberLogUtils.attachScreenshot(true);
         JavascriptExecutor js = (JavascriptExecutor) BrowserUtils.getDriver(); // jsexecutor is for behavior of mouse and keyboard
         js.executeScript("window.scrollBy(0,1000)");
         BrowserUtils.isDisplayed(getElementByXpath(XPATH_TEMPLATE_NAV_LINK_TEXT, navBar2));
+        BrowserUtils.sleep(2000);
+        CucumberLogUtils.attachScreenshot(true);
     }
 
     @Then("Verify {string} navigate to window as url as {string}")
     public void verifyNavigateToWindowAsUrlAs(String navBar2, String url) {
         // BrowserUtils.click(BrowserUtils.getDriver().findElement(By.xpath(String.format(XPATH_TEMPLATE_NAV_LINK_TEXT, navBar2)))); >> long version of line below
+
         BrowserUtils.click(getElementByXpath(XPATH_TEMPLATE_NAV_LINK_TEXT, navBar2)); // commonPage template
         BrowserUtils.switchToNewWindow();
         BrowserUtils.assertEquals(BrowserUtils.getDriver().getCurrentUrl(), url);
+        BrowserUtils.sleep(2000);
+        CucumberLogUtils.attachScreenshot(true);
     }
 
     @Then("Verify {string} icon is displayed")
@@ -171,6 +184,20 @@ public class HomeSteps implements CommonPage {
         BrowserUtils.click(getElementByXpath(XPATH_TEMPLATE_HREF, socialMediaTop));
         BrowserUtils.switchToNewWindow();
         BrowserUtils.assertEquals(BrowserUtils.getDriver().getCurrentUrl(), url);
+    }
+
+    @When("I scroll dow to the section {string}")
+    public void iScrollDowToTheSection(String msg) {
+        JavascriptExecutor js = (JavascriptExecutor) BrowserUtils.getDriver();
+        js.executeScript("window.scrollBy(0,1000)");
+        BrowserUtils.getDriver().findElement(By.xpath("/html/body/div[1]/section[5]/div/div[1]/h2"));
+        //BrowserUtils.isDisplayed(getElementByXpath(XPATH_TEMPLATE_NAV_LINK_TEXT, msg));
+    }
+
+    @Then("Verify the {string} displayed above the picture of the writer {string}")
+    public void verifyTheDisplayedAboveThePictureOfTheWriter(String person, String message) {
+        BrowserUtils.moveIntoView(page.webFooter);
+
     }
 }
 

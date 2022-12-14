@@ -29,6 +29,9 @@ public class HomePage {
     @FindBy(xpath = "/html/body/div[1]/header/div[4]/div/div[2]")
     public WebElement navBar2;
 
+    @FindBy(xpath ="//div[@class='footer-copyright']")
+    public WebElement webFooter;
 
 
+//h2[text()='" + headerText+ "']
 }
